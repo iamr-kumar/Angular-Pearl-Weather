@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { WeatherService } from './weather.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Perl-Weather';
+  @ViewChild('city', {static: false}) cityName: ElementRef;
+  @Output() cityChanged = new EventEmitter<string>();
+  city: string;
+
+  constructor(private weatherService: WeatherService, private route:Router, private currentRoute: ActivatedRoute){}
+
+  onGetCity(){
+    this.city = this.cityName.nativeElement.value;
+    this.weatherService.onCityChange(this.city);
+  }
 }

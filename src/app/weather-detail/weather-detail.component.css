@@ -1,0 +1,121 @@
+.container-fluid{
+    -webkit-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
+    -moz-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
+    box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
+    border-radius: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.current-weather{
+    border-bottom-left-radius: 2.5rem;
+    border-top-left-radius: 2.5rem;
+    padding: 3rem;
+    text-align: center;
+    height: 100%;
+}
+
+.day-background{
+    background-image: linear-gradient( 135deg, #EE9AE5 10%, #5961F9 100%);    
+}
+
+.night-background{
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+}
+
+.col-lg-4, .col-lg-8{
+    padding: 0;
+}
+
+.date-container{
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.temp-text-container{
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.main-temp{
+    font-size: 5rem;
+}
+
+.temp-metric{
+    font-size: 5rem;
+}
+
+.feels-like{
+    text-transform: none;
+}
+
+.more-info-container{
+    display: flex;
+    margin-top: 1.2rem;
+    justify-content: space-around;
+    margin: 2rem 0; 
+}
+
+.humidity{
+    font-size: 1.2rem;
+
+}
+
+.forecast-weather{
+    background-color: #fff;
+    border-top-right-radius: 2.5rem;
+    border-bottom-right-radius: 2.5rem;
+    height: 100%;
+    padding: 0 3rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.one-day-weather{
+    margin-bottom: 1.2rem;
+    margin-right: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    text-align: center;
+}
+
+.one-day-weather span{
+    font-size: 3rem;
+}
+.one-day-weather h4{
+    margin-bottom: 0;
+}
+
+.temp-info{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.condition{
+    font-size: 0.8rem;
+    font-weight: 200;
+}
+
+.add-button{
+    text-align: center;
+}
+
+.add-weather-button button{
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    border: 2px solid #fff;
+    font-size: 2rem;
+    color: #fff;
+    background-color: rgb(170, 167, 167);
+}
+
+
+.add-button h5{
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-size: 1rem;
+    font-weight: 400;
+}

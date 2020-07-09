@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 align-items-stretch">
+            <div class="current-weather" 
+                [ngClass] = "{ 'day-background': isDay, 'night-background': !isDay}">
+                <div class="date-container">
+                    <span class="current-date">{{date}}, {{time}}</span>
+                </div>
+                <div class="temp-text-container">
+                    <span class="main-temp">{{temp}}</span>
+                    <span class="temp-metric">&#176;C</span>
+                    <h3 class="weather-condition">{{state}}</h3>
+                    <h6 class="feels-like">Feels like {{feelsLike}}&#176;C</h6>
+                    <div class="more-info-container">
+                        <div class="min-temp">
+                            <h6>Min</h6>
+                            <h6>{{minTemp}}&#176;C</h6>
+                        </div>
+                        <div class="max-temp">
+                            <h6>Max</h6>
+                            <h6>{{maxTemp}}&#176;C</h6>
+                        </div>
+                        <div class="humidity">
+                            <h6>Humidity</h6>
+                            <h6>{{humidity}}%</h6>
+                        </div>
+                        <div class="wind-speed">
+                            <h6>Wind</h6>
+                            <h6>{{wind}} KM/H</h6>
+                        </div>
+                        <div class="sunset" *ngIf="isDay">
+                            <h6>Sunset</h6>
+                            <h6>{{sunsetTime}}</h6>
+                        </div>
+                    </div>
+                    <div class="city-name">
+                        <h3>{{city}}</h3>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="col-lg-4 align-items-stretch">
+            <div class="forecast-weather">
+                <div class="next-week-weather d-flex flex-wrap">
+                    <div class="one-day-weather" *ngFor = "let forecast of forecastWeather">
+                        <h4 class="day-name">{{forecast.day}}</h4>
+                        <span><i [class] = "forecast.icon"></i></span>
+                        <h4 class="temp-info">{{forecast.temp}}&#176;C</h4>
+                        <h5 class="condition">{{forecast.state}}</h5>
+                    </div>
+                </div>
+                <div class="add-button">
+                    <div class="add-weather-button">
+                        <button class="btn-grad"><span><i class="fas fa-plus"></i></span></button>
+                    </div>
+                    <h5>Add City</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
