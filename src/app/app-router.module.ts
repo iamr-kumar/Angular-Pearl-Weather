@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { WeatherDetailComponent } from './weather-detail/weather-detail.component';
+import { WeatherCardComponent } from './weather-card/weather-card.component';
 
 const routes = [
     {
         path: '',
-        component: AppComponent,
+        component: WeatherCardComponent,
         pathMatch: 'full'
     },
     {
-        path: 'details',
+        path: 'details/:id',
         component: WeatherDetailComponent
     }
 ]
