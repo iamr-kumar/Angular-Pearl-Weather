@@ -1,1 +1,7 @@
-<app-single-card></app-single-card>
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-md-4 single-component" *ngFor="let city of cities">
+            <app-single-card [city] = "city"></app-single-card>
+        </div>
+    </div>
+</div>

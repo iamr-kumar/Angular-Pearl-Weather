@@ -1,0 +1,35 @@
+.container-fluid{
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 2rem;
+    text-align:center;
+    padding: 2rem 4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-box-shadow: -3px 2px 29px -4px rgba(87,101,250,1);
+    -moz-box-shadow: -3px 2px 29px -4px rgba(87,101,250,1);
+    box-shadow: -3px 2px 29px -4px rgba(87,101,250,1);
+}
+
+.bg-night{
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+    background-blend-mode: multiply,multiply;
+    color: #fff;
+}
+
+h4, h5{
+    font-weight: 400;
+    font-size: 1.2  rem;
+}
+
+.weather-icon {
+    font-size: 7rem;
+}
+
+.main-temp h3{
+    font-size: 2.5rem;
+}
+
+.min-max-temp{
+    text-transform: none;
+}
