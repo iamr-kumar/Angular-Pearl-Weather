@@ -12,10 +12,10 @@ export class AppComponent {
   @Output() cityChanged = new EventEmitter<string>();
   city: string;
 
-  constructor(private weatherService: WeatherService, private route:Router, private currentRoute: ActivatedRoute){}
+  constructor(private weatherService: WeatherService, private router:Router, private currentRoute: ActivatedRoute){}
 
   onGetCity(){
     this.city = this.cityName.nativeElement.value;
-    this.weatherService.onCityChange(this.city);
+    this.router.navigate(['details', this.city], {relativeTo: this.currentRoute});
   }
 }
