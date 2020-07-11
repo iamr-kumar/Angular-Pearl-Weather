@@ -32,6 +32,10 @@
                             <h6>Sunset</h6>
                             <h6>{{sunsetTime}}</h6>
                         </div>
+                        <div class="sunset" *ngIf="!isDay">
+                            <h6>Sunrise</h6>
+                            <h6>{{sunriseTime}}</h6>
+                        </div>
                     </div>
                     <div class="city-name">
                         <h3>{{city}}</h3>
@@ -41,19 +45,25 @@
         </div>
         <div class="col-lg-4 align-items-stretch">
             <div class="forecast-weather">
-                <div class="next-week-weather d-flex flex-wrap">
-                    <div class="one-day-weather" *ngFor = "let forecast of forecastWeather">
+                <div class="next-week-weather row">
+                    <div class="one-day-weather col-lg-4 col-md-6"  *ngFor = "let forecast of forecastWeather">
                         <h4 class="day-name">{{forecast.day}}</h4>
                         <span><i [class] = "forecast.icon"></i></span>
                         <h4 class="temp-info">{{forecast.temp}}&#176;C</h4>
                         <h5 class="condition">{{forecast.state}}</h5>
                     </div>
                 </div>
-                <div class="add-button">
+                <div class="add-button mt-5" *ngIf = "!isCityAdded">
                     <div class="add-weather-button">
-                        <button class="btn-grad"><span><i class="fas fa-plus"></i></span></button>
+                        <button class="btn-grad" (click) = "addCity()"><span><i class="fas fa-plus"></i></span></button>
+                        <h5>Add City</h5>
                     </div>
-                    <h5>Add City</h5>
+                </div>
+                <div class="add-button mt-5" *ngIf = "isCityAdded">
+                    <div class="add-weather-button">
+                        <button class="btn-grad" (click) = "removeCity()"><span><i class="fas fa-minus"></i></span></button>
+                        <h5>Remove City</h5>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit} from '@angular/core';
 import { WeatherService } from '../weather.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-weather-detail',
@@ -9,7 +9,7 @@ import { WeatherService } from '../weather.service';
 })
 export class WeatherDetailComponent implements OnInit {
 
-    city: string = 'Ranchi';
+    city: string
     temp: number;
     maxTemp: number;
     minTemp: number;
@@ -21,27 +21,31 @@ export class WeatherDetailComponent implements OnInit {
     time: string;
     isDay: boolean;
     sunsetTime: string;
-    
+    sunriseTime: string;
     today: string;
-
     forecastWeather: {
         day: string,
         temp: number,
         state: string,
         icon: string
     }[] = [];
+    isCityAdded: boolean = false;
 
 
-    constructor(private weatherService: WeatherService) { }
+    constructor(private weatherService: WeatherService, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
-        this.weatherService.cityChanged.subscribe(city => {
-            this.city = city;
+        this.route.params.subscribe((params: Params) => {
+            this.city = params['id'];
             this.forecastWeather = [];
             this.getWeatherInfo(this.city);
         });
-        this.getWeatherInfo(this.city);
 
+        this.weatherService.fetchCities().subscribe(cities => this.weatherService.cities = cities);
+        
+        if(this.weatherService.cities.includes(this.city)){
+            this.isCityAdded = true;
+        }
     }
 
     getWeatherInfo(city: string){
@@ -58,13 +62,13 @@ export class WeatherDetailComponent implements OnInit {
             this.state = weatherData['weather'][0].main;
             let sunset = new Date(weatherData['sys'].sunset * 1000);
             this.sunsetTime = sunset.getHours() + ':' + sunset.getMinutes();
-            console.log(this.sunsetTime)
-            if(sunset.getTime() < currentDate.getTime()){
+            let sunrise = new Date(weatherData['sys'].sunsrise * 1000);
+            this.sunriseTime = sunrise.getHours() + ':' + sunrise.getMinutes();
+            if(sunset.getTime() < currentDate.getTime() && sunrise.getTime() > currentDate.getTime()){
                 this.isDay = false;
             }else{
                 this.isDay = true;
             }
-            console.log(this.isDay);
             this.temp = Math.round(Number(weatherData['main']['temp']));
             this.maxTemp = Math.round(Number(weatherData['main']['temp_max']));
             this.minTemp = Math.round(Number(weatherData['main']['temp_min']));
@@ -98,6 +102,16 @@ export class WeatherDetailComponent implements OnInit {
                 }
             }
         });
+    }
+
+    addCity(){
+        this.isCityAdded = true;
+        this.weatherService.cityAdd(this.city);
+    }
+
+    removeCity(){
+        this.isCityAdded = false;
+        this.weatherService.cityRemove(this.city);
     }
 
 }
