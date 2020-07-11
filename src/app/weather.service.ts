@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject} from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,10 @@ import { Subject } from 'rxjs';
 export class WeatherService {
 
     city: string;
-    cityChanged: Subject<string> = new Subject<string>();
+    cities: string[] = [];
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: Router) {
+    }
 
     getWeatherByCityName(city: string): Subject<{}> {
         const weatherData = new Subject<{}>();
@@ -79,9 +81,26 @@ export class WeatherService {
         return forecast;
     }
 
-    onCityChange(city: string){
-        this.city = city;
-        this.cityChanged.next(this.city);
+    putCities(){
+        this.http.put('https://pearl-weather.firebaseio.com/cities.json', this.cities).subscribe(data => {
+            console.log(data);
+            this.router.navigate(['']);
+        })
+    }
+
+    fetchCities(){
+        return this.http.get<Array<string>>('https://pearl-weather.firebaseio.com/cities.json');
+    }
+
+    cityAdd(city: string){
+        this.cities.push(city);
+        this.putCities();
+    }
+
+    cityRemove(city: string){
+        this.cities.splice(this.cities.indexOf(city));
+        console.log(this.cities);
+        this.putCities();
     }
 
 }
