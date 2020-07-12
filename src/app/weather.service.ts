@@ -85,7 +85,10 @@ export class WeatherService {
         this.http.put('https://pearl-weather.firebaseio.com/cities.json', this.cities).subscribe(data => {
             console.log(data);
             this.router.navigate(['']);
-        })
+        },
+        err => {
+            console.log(err);
+        });
     }
 
     fetchCities(){
@@ -95,11 +98,12 @@ export class WeatherService {
     cityAdd(city: string){
         this.cities.push(city);
         this.putCities();
+        
+        
     }
 
     cityRemove(city: string){
         this.cities.splice(this.cities.indexOf(city));
-        console.log(this.cities);
         this.putCities();
     }
 
