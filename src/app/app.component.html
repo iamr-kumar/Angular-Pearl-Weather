@@ -1,8 +1,33 @@
-<div class="root-container">
+<aside class="side-menu" [ngClass] = "{'side-menu-show': sideNavActive}">
+    <nav class="slide-menu" [ngClass] = "{'slide-menu-show': sideNavActive}">
+        <section class="menu-header">
+            <h4 class="welcome-text">Hello There</h4>
+            <div class="user-profile row">
+                <div class="col-md-4">
+                    <img src="https://images.unsplash.com/photo-1526621553736-d0cfb8b59b76?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
+                    alt="user-profile-image" 
+                    class="profile-image">
+                </div>
+                <div class="user-details col-md-8">
+                    <h5 class="user-name">Ritik Kumar</h5>
+                    <h6 class="user-email">ritik.kumar006@gmail.com</h6>
+                </div>
+            </div>
+        </section>
+        <section class="menu-content">
+            <div class="nav-routes">
+                <a [routerLink] = "['/']" (click) = "toggleNav()">Home</a>
+                <a [routerLink] = "['/']" (click) = "toggleNav()">Logout</a>
+            </div>
+        </section>
+    </nav>
+</aside>
+
+<div class="root-container" [ngClass] = "{'.bg-dark-mode': darkMode, '.bg-light-mode': !darkMode}">
     <header class="main-header">
-        <div class="left-section d-flex">
+        <div class="left-section d-flex justify-content-between">
             <div id="hamburger-icon">
-                <button><span><i class="fas fa-bars"></i></span></button>
+                <button (click) = "toggleNav()" ><span><i class="fas fa-bars"></i></span></button>
             </div>
             <h3 class="logo">Pearl</h3>
         </div>
@@ -24,17 +49,15 @@
             
         </div>
         <div class="right-section"> 
-            <div class="mode-toggle">
-                <h4>Light / Dark</h4>
+            <div class="user-name">
+                <h4>Ritik Kumar</h4>
             </div>
         </div>
     </header>
-    <div class="container">
         <main class="main-container">
             <router-outlet></router-outlet>
         </main>
 
-    </div>
 
     
 </div>

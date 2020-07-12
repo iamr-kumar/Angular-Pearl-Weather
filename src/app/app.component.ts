@@ -9,6 +9,8 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   city: string;
+  sideNavActive: boolean = false;
+  darkMode: boolean = false;
 
   constructor(private router:Router, private currentRoute: ActivatedRoute){}
 
@@ -16,4 +18,14 @@ export class AppComponent {
     this.city = city.value.cityName;
     this.router.navigate(['details', this.city], {relativeTo: this.currentRoute});
   }
+
+  toggleNav(){
+      this.sideNavActive = !this.sideNavActive;
+  }
+
+  toggleDarkMode(){
+      console.log(this.darkMode);
+      this.darkMode = !this.darkMode;
+  }
+
 }

@@ -5,12 +5,119 @@ button{
     background: transparent;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
+.side-menu{
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.3s linear ease;
+    pointer-events: none;
+}
+
+.side-menu::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #0c1066;
+    opacity: 0;
+    transition: opacity 300ms linear;
+    will-change: opacity;
+}
+
+.side-menu-show{
+    pointer-events: auto;
+}
+
+.side-menu-show::before {
+    opacity: 0.3;
+}
+
+.slide-menu{
+    box-sizing: border-box;
+    transform: translateX(-103%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    height: 100%;
+    width: 90%;
+    max-width: 26rem;
+    background-color: white;
+    box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1); 
+    transition: transform 300ms linear;
+    will-change: transform;
+}
+
+.slide-menu-show {
+    transform: none;
+}
+
+.menu-header{
+    background-color: #8EC5FC;
+    background: linear-gradient(to bottom, #B290FF, #2E1D65);
+    width: 100%;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 255, 0.2);
+}
+
+.welcome-text{
+    padding-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.profile-image{
+    width: 100%;
+    align-self: center;
+    border-radius: 50%;
+}
+
+.user-profile{
+    padding: 2rem;
+}
+
+.user-details{
+    align-self: center;
+}
+
+.menu-content{
+    text-align: center;
+}
+
+.nav-routes{
+    margin-top: 1rem;
+}
+
+.nav-routes a{
+    color: rgb(13, 32, 68);
+    font-size: 1.2rem;
+    display: block;
+    padding: 1rem 0;
+    cursor: pointer;
+}
+
 .root-container{
     width: 100vw;
-    min-height: 100vh;
-    background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+
 
 .main-header{
     width: 100%;
@@ -33,6 +140,11 @@ button{
     font-size: 1.8rem;
     margin-right: 20px;
     border: none;
+    z-index: 20;
+}
+
+#hamburger-icon button{
+    outline: none;
 }
 
 .left-section .logo{
@@ -75,13 +187,18 @@ button{
     outline: none;
 }   
 
-.right-section .mode-toggle h4{
+.right-section .user-name h4{
     font-size: 1.3rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 400;
 }
 
 .main-container{
-    margin-top: 3rem;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    padding-top: 3rem;
+    background: linear-gradient(to bottom, #B290FF, #2E1D65);
 }
 
