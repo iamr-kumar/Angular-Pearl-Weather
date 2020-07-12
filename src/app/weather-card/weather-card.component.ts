@@ -7,16 +7,24 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather-card.component.css']
 })
 export class WeatherCardComponent implements OnInit {
-  cities: string[];
-
+  cities: string[] = [];
+  isLoading: boolean = false;  
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
-    this.weatherService.fetchCities().subscribe(cities => {
-        this.cities = cities;
-        this.weatherService.cities = cities;
-        console.log(this.weatherService.cities);
-    });
-  }
+        this.isLoading = true;
+        this.weatherService.fetchCities().subscribe(cities => {
+                if(cities){
+                    this.cities = cities;
+                }
+                this.weatherService.cities = this.cities;
+                this.isLoading = false;
+            
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
 
 }

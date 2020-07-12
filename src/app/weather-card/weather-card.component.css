@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
 .single-component{
     margin-bottom: 2rem;
+}
+
+.weather-cards h3{
+    color: #fff;
+    font-family: 'Playfair Display', serif;
 }
