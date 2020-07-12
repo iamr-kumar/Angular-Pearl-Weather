@@ -65,6 +65,7 @@ button{
 .search-city-button{
     position: absolute;
     right: -0.2rem;
+    top: -20px;
     height: 3.5rem;
     width: 3.5rem;
     border-radius: 50%;

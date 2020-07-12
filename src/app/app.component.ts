@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { WeatherService } from './weather.service';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +8,12 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('city', {static: false}) cityName: ElementRef;
-  @Output() cityChanged = new EventEmitter<string>();
   city: string;
 
-  constructor(private weatherService: WeatherService, private router:Router, private currentRoute: ActivatedRoute){}
+  constructor(private router:Router, private currentRoute: ActivatedRoute){}
 
-  onGetCity(){
-    this.city = this.cityName.nativeElement.value;
+  onGetCity(city: NgForm){
+    this.city = city.value.cityName;
     this.router.navigate(['details', this.city], {relativeTo: this.currentRoute});
   }
 }

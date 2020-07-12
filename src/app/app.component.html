@@ -8,10 +8,18 @@
         </div>
         <div class="middle-section">
             <div class="search-city-wrapper d-flex">
-                <input type="text" class="search-city-input" placeholder="Search City" #city>
-                <button class="search-city-button" (click) = "onGetCity()">
-                    <span><i class="fas fa-search"></i></span>
-                </button>
+                <form #inputCity = "ngForm" (ngSubmit) = "onGetCity(inputCity)">
+                    <input type="text" 
+                    class="search-city-input" 
+                    placeholder="Search City" 
+                    name = "cityName"
+                    ngModel
+                    required>
+                    <button class="search-city-button" [disabled] = "!inputCity.valid">
+                        <span><i class="fas fa-search"></i></span>
+                    </button>
+                </form>
+                
             </div>
             
         </div>
