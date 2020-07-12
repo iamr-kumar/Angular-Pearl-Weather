@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, AfterViewInit } from '@angular/core';
 import { WeatherService } from 'src/app/weather.service';
+import { Subscription, Subject } from 'rxjs';
 
 @Component({
     selector: 'app-single-card',
     templateUrl: './single-card.component.html',
     styleUrls: ['./single-card.component.css']
 })
-export class SingleCardComponent implements OnInit {
+export class SingleCardComponent implements OnInit, OnDestroy {
 
     @Input() city: string;
     temp: number;
@@ -15,7 +16,8 @@ export class SingleCardComponent implements OnInit {
     feelsLike: number;
     icon: string;
     isDay: boolean = false;
-    state: string;  
+    state: string; 
+    weatherInfoSub: Subscription; 
 
     constructor(private weatherService: WeatherService) { }
 
@@ -26,7 +28,7 @@ export class SingleCardComponent implements OnInit {
     getWeatherInfo(city: string){
         const currentDate = new Date();
         this.city = city;
-        this.weatherService.getWeatherByCityName(this.city)
+        this.weatherInfoSub = this.weatherService.getWeatherByCityName(this.city)
             .subscribe(weatherData => {
                 let sunset = new Date(weatherData['sys'].sunset * 1000);
                 if(sunset.getTime() < currentDate.getTime()){
@@ -50,6 +52,11 @@ export class SingleCardComponent implements OnInit {
             });
 
     
+    }
+
+
+    ngOnDestroy(): void{
+        this.weatherInfoSub.unsubscribe();
     }
 
 }

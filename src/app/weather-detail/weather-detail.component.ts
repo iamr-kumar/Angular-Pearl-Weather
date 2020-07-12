@@ -1,13 +1,14 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weather-detail',
   templateUrl: './weather-detail.component.html',
   styleUrls: ['./weather-detail.component.css']
 })
-export class WeatherDetailComponent implements OnInit {
+export class WeatherDetailComponent implements OnInit, OnDestroy {
 
     city: string
     temp: number;
@@ -32,6 +33,9 @@ export class WeatherDetailComponent implements OnInit {
     isCityAdded: boolean = false;
 
     isLoading = false;
+
+    weatherSub: Subscription;
+    forecastSub: Subscription;
 
 
     constructor(private weatherService: WeatherService, private route: ActivatedRoute) { }
@@ -61,7 +65,7 @@ export class WeatherDetailComponent implements OnInit {
         this.time = currentDate.getHours() + ":" + currentDate.getMinutes();
         this.city = city;
         this.date = months[currentDate.getMonth()] + ' ' + currentDate.getDate();
-        this.weatherService.getWeatherByCityName(this.city).subscribe(weatherData => {
+        this.weatherSub = this.weatherService.getWeatherByCityName(this.city).subscribe(weatherData => {
             this.state = weatherData['weather'][0].main;
             let sunset = new Date(weatherData['sys'].sunset * 1000);
             this.sunsetTime = sunset.getHours() + ':' + sunset.getMinutes();
@@ -80,7 +84,7 @@ export class WeatherDetailComponent implements OnInit {
             this.wind = weatherData['wind'].speed;
         });
 
-        this.weatherService.getForecastWeather(this.city).subscribe(forecast => {
+        this.forecastSub = this.weatherService.getForecastWeather(this.city).subscribe(forecast => {
             var previousDay = '';
             var prefix = "wi wi-owm-";
             for(var i = 0; i < forecast.length; i++){
@@ -114,6 +118,11 @@ export class WeatherDetailComponent implements OnInit {
 
     removeCity(){
         this.weatherService.cityRemove(this.city);
+    }
+
+    ngOnDestroy(): void{
+        this.weatherSub.unsubscribe();
+        this.forecastSub.unsubscribe();
     }
 
 }
