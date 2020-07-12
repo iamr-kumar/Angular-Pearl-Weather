@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { WeatherService } from '../weather.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-weather-detail',
@@ -19,7 +19,7 @@ export class WeatherDetailComponent implements OnInit {
     wind: number;
     date: string;
     time: string;
-    isDay: boolean;
+    isDay: boolean = false;
     sunsetTime: string;
     sunriseTime: string;
     today: string;
@@ -31,6 +31,8 @@ export class WeatherDetailComponent implements OnInit {
     }[] = [];
     isCityAdded: boolean = false;
 
+    isLoading = false;
+
 
     constructor(private weatherService: WeatherService, private route: ActivatedRoute) { }
 
@@ -40,15 +42,16 @@ export class WeatherDetailComponent implements OnInit {
             this.forecastWeather = [];
             this.getWeatherInfo(this.city);
         });
-
-        this.weatherService.fetchCities().subscribe(cities => this.weatherService.cities = cities);
         
         if(this.weatherService.cities.includes(this.city)){
             this.isCityAdded = true;
+        }else{
+            this.isCityAdded = false;
         }
     }
 
     getWeatherInfo(city: string){
+        this.isLoading = true;
         const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
                         'September', 'October', 'November', 'December'];
@@ -101,16 +104,15 @@ export class WeatherDetailComponent implements OnInit {
                     previousDay = currentDay;
                 }
             }
+            this.isLoading = false;
         });
     }
 
     addCity(){
-        this.isCityAdded = true;
         this.weatherService.cityAdd(this.city);
     }
 
     removeCity(){
-        this.isCityAdded = false;
         this.weatherService.cityRemove(this.city);
     }
 

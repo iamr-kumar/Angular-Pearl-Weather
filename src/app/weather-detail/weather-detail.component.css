@@ -6,6 +6,12 @@
     margin-bottom: 4rem;
 }
 
+.back-button a{
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
 .current-weather{
     border-bottom-left-radius: 2.5rem;
     border-top-left-radius: 2.5rem;
@@ -110,6 +116,7 @@
     font-size: 2rem;
     color: #fff;
     background-color: rgb(170, 167, 167);
+    outline: none;
 }
 
 
