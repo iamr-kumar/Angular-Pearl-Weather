@@ -14,7 +14,7 @@ export class SingleCardComponent implements OnInit {
     minTemp: number;
     feelsLike: number;
     icon: string;
-    isDay: boolean;
+    isDay: boolean = false;
     state: string;  
 
     constructor(private weatherService: WeatherService) { }
