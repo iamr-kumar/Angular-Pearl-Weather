@@ -6,13 +6,13 @@
     </div>
 </div>
 
-<div class="container" *ngIf = "!isLoading">
+<div class="container weather-detail" *ngIf = "!isLoading">
     <div class="row">
         <div class="col-lg-8 align-items-stretch">
             <div class="current-weather" 
                 [ngClass] = "{ 'day-background': isDay, 'night-background': !isDay}">
                 <div class="back-button d-flex justify-content-start">
-                    <a [routerLink] = "['/']"><i class="fas fa-arrow-circle-left"></i></a>
+                    <a [routerLink] = "['/home']"><i class="fas fa-arrow-circle-left"></i></a>
                 </div>
                 <div class="date-container">
                     <span class="current-date">{{date}}, {{time}}</span>
@@ -64,13 +64,13 @@
                         <h5 class="condition">{{forecast.state}}</h5>
                     </div>
                 </div>
-                <div class="add-button mt-5" *ngIf = "!isCityAdded">
+                <div class="add-button mt-5" *ngIf = "isCityAdded">
                     <div class="add-weather-button">
                         <button class="btn-grad" (click) = "addCity()"><span><i class="fas fa-plus"></i></span></button>
                         <h5>Add City</h5>
                     </div>
                 </div>
-                <div class="add-button mt-5" *ngIf = "isCityAdded">
+                <div class="add-button mt-5" *ngIf = "!isCityAdded">
                     <div class="add-weather-button">
                         <button class="btn-grad" (click) = "removeCity()"><span><i class="fas fa-minus"></i></span></button>
                         <h5>Remove City</h5>

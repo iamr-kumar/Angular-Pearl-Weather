@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-weather-detail',
@@ -38,20 +38,21 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
     forecastSub: Subscription;
 
 
-    constructor(private weatherService: WeatherService, private route: ActivatedRoute) { }
+
+    constructor(public weatherService: WeatherService, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => {
             this.city = params['id'];
             this.forecastWeather = [];
+            if(this.weatherService.cities.includes(params['id'])){
+                this.isCityAdded = false;
+            }
+            else{
+                this.isCityAdded = true;
+            }
             this.getWeatherInfo(this.city);
         });
-        
-        if(this.weatherService.cities.includes(this.city)){
-            this.isCityAdded = true;
-        }else{
-            this.isCityAdded = false;
-        }
     }
 
     getWeatherInfo(city: string){
@@ -113,12 +114,13 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
     }
 
     addCity(){
-        this.weatherService.cityAdd(this.city);
+        this.weatherService.addCity(this.city);
     }
 
     removeCity(){
-        this.weatherService.cityRemove(this.city);
+        this.weatherService.removeCity(this.city);
     }
+
 
     ngOnDestroy(): void{
         this.weatherSub.unsubscribe();

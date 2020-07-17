@@ -1,9 +1,11 @@
-.container-fluid{
+.weather-detail{
     -webkit-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
     -moz-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
     box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
     border-radius: 2.5rem;
     margin-bottom: 4rem;
+    animation: slideup 1s ease-in-out, fadein 1.25s ease-in-out 0s 1;
+
 }
 
 .back-button a{
