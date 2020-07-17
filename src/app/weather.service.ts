@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject} from 'rxjs';
+import { Subject } from 'rxjs';
+import { first } from 'rxjs/operators'
 import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,8 @@ export class WeatherService {
     city: string;
     cities: string[] = [];
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private fb: AuthService) {
+        
     }
 
     getWeatherByCityName(city: string): Subject<{}> {
@@ -23,7 +26,7 @@ export class WeatherService {
             params: {
                 q: city,
             }
-        })
+        }).pipe(first())
         .subscribe(
             (weather) => {
                 // console.log(weather);
@@ -81,30 +84,21 @@ export class WeatherService {
         return forecast;
     }
 
-    putCities(){
-        this.http.put('https://pearl-weather.firebaseio.com/cities.json', this.cities).subscribe(data => {
-            console.log(data);
-            this.router.navigate(['']);
-        },
-        err => {
-            console.log(err);
-        });
-    }
-
-    fetchCities(){
-        return this.http.get<Array<string>>('https://pearl-weather.firebaseio.com/cities.json');
-    }
-
-    cityAdd(city: string){
+    addCity(city: string){
         this.cities.push(city);
-        this.putCities();
-        
-        
+        this.fb.updateCity(this.cities);
+        this.router.navigate(['/home']);
     }
 
-    cityRemove(city: string){
-        this.cities.splice(this.cities.indexOf(city));
-        this.putCities();
+    removeCity(city: string){
+        var index = this.cities.indexOf(city);
+        this.cities.splice(index, 1);
+        this.fb.updateCity(this.cities);
+        this.router.navigate(['/home']);
     }
+
+    
+
+
 
 }

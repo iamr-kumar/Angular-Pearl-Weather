@@ -1,4 +1,4 @@
-<aside class="side-menu" [ngClass] = "{'side-menu-show': sideNavActive}">
+<aside class="side-menu" [ngClass] = "{'side-menu-show': sideNavActive}" *ngIf = "user">
     <nav class="slide-menu" [ngClass] = "{'slide-menu-show': sideNavActive}">
         <section class="menu-header">
             <h4 class="welcome-text">Hello There</h4>
@@ -9,22 +9,22 @@
                     class="profile-image">
                 </div>
                 <div class="user-details col-md-8">
-                    <h5 class="user-name">Ritik Kumar</h5>
-                    <h6 class="user-email">ritik.kumar006@gmail.com</h6>
+                    <h5 class="user-name">{{user.displayName}}</h5>
+                    <h6 class="user-email">{{user.email}}</h6>
                 </div>
             </div>
         </section>
         <section class="menu-content">
             <div class="nav-routes">
-                <a [routerLink] = "['/']" (click) = "toggleNav()">Home</a>
-                <a [routerLink] = "['/']" (click) = "toggleNav()">Logout</a>
+                <a [routerLink] = "['/']" [routerLink] = "['/home']">Home</a>
+                <a [routerLink] = "['/']" (click) = "logout()">Logout</a>
             </div>
         </section>
     </nav>
 </aside>
 
-<div class="root-container" [ngClass] = "{'.bg-dark-mode': darkMode, '.bg-light-mode': !darkMode}">
-    <header class="main-header">
+<div class="root-container">
+    <header class="main-header" *ngIf = "user">
         <div class="left-section d-flex justify-content-between">
             <div id="hamburger-icon">
                 <button (click) = "toggleNav()" ><span><i class="fas fa-bars"></i></span></button>
@@ -50,7 +50,7 @@
         </div>
         <div class="right-section"> 
             <div class="user-name">
-                <h4>Ritik Kumar</h4>
+                <h4>{{user.displayName}}</h4>
             </div>
         </div>
     </header>
