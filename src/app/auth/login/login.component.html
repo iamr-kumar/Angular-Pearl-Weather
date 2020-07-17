@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="login-form">
+                <h3>Login</h3>
+                <form class="form-group" #login = "ngForm" (ngSubmit) = "onLogin(login)">
+                    <div class="form-group">
+                        <input type="email" 
+                        name="email" 
+                        placeholder="Email" 
+                        class="form-control"
+                        ngModel
+                        required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" 
+                        name="password" 
+                        placeholder="Password" 
+                        class="form-control"
+                        ngModel
+                        required
+                        minlength = "8">
+                    </div>
+                    <div class="form-group">
+                        <button class="login-button">Login</button>
+                    </div>
+                </form>
+                <div class="message">
+                    <p>Not registered yet? <span><a [routerLink] = "['/signup']">Sign Up</a></span></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

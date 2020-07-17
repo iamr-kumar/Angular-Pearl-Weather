@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="login-form">
+                <h3>Signup</h3>
+                <form class="form-group" #register = "ngForm" (ngSubmit) = "signup(register)">
+                    <div class="form-group">
+                        <input type="text" 
+                        name="name" 
+                        placeholder="Name" 
+                        class="form-control"
+                        ngModel
+                        required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" 
+                        name="email" 
+                        placeholder="Email" 
+                        class="form-control"
+                        ngModel
+                        required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" 
+                        name="password" 
+                        placeholder="Password (Min 8 characters)" 
+                        class="form-control"
+                        ngModel
+                        minlength = "8"
+                        required>
+                    </div>
+                    <div class="form-group">
+                        <button class="signup-button" [disabled] = "!register.valid">Sign Up</button>
+                    </div>
+                </form>
+                <div class="message">
+                    <p>Already registered? <span><a [routerLink] = "['/login']"> Login</a></span></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
