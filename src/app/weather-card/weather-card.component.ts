@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../weather.service';
+import { AuthService } from '../auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weather-card',
@@ -7,24 +9,21 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather-card.component.css']
 })
 export class WeatherCardComponent implements OnInit {
-  cities: string[] = [];
   isLoading: boolean = false;  
-  constructor(private weatherService: WeatherService) { }
+  sub: Subscription;
+
+  constructor(public weatherService: WeatherService, private fb: AuthService) { }
 
   ngOnInit(): void {
         this.isLoading = true;
-        this.weatherService.fetchCities().subscribe(cities => {
-                if(cities){
-                    this.cities = cities;
-                }
-                this.weatherService.cities = this.cities;
-                this.isLoading = false;
-            
-            },
-            err => {
-                console.log(err);
-            }
-        );
+        this.sub = this.fb.user.subscribe(userData => {
+            this.weatherService.cities = userData.cities;
+        }, err => {
+            console.log(err);
+        });
+        setTimeout(() => {
+            this.isLoading = false;
+        }, 2000);
     }
 
 }

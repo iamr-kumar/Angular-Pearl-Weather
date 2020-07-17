@@ -3,12 +3,12 @@
         <app-loading-spinner></app-loading-spinner>
     </div>
     <div class="row justify-content-center">
-        <div class="col-xs-12 weather-cards" *ngIf = "cities.length === 0 && !isLoading">
+        <div class="col-xs-12 weather-cards" *ngIf = "weatherService.cities.length === 0 && !isLoading">
             <h3>Add some cities...</h3>
         </div>
     </div>
     <div class="row" *ngIf = "!isLoading">
-        <div class="col-md-4 single-component" *ngFor="let city of cities"> 
+        <div class="col-md-4 single-component" *ngFor="let city of weatherService.cities"> 
             <app-single-card [city] = "city"></app-single-card>
         </div>
     </div>
