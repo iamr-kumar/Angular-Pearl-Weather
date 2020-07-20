@@ -66,9 +66,9 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
         const todayInNumber = currentDate.getDay();
         this.today = days[todayInNumber];
         this.time = currentDate.getHours() + ":" + currentDate.getMinutes();
-        this.city = city;
         this.date = months[currentDate.getMonth()] + ' ' + currentDate.getDate();
         this.weatherSub = this.weatherService.getWeatherByCityName(this.city).subscribe(weatherData => {
+            this.city = weatherData['name'];
             this.state = weatherData['weather'][0].main;
             let sunset = new Date(weatherData['sys'].sunset * 1000);
             this.sunsetTime = sunset.getHours() + ':' + sunset.getMinutes();
@@ -111,7 +111,7 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
                     previousDay = currentDay;
                 }
             }
-            // this.isLoading = false;
+            
         });
     }
 

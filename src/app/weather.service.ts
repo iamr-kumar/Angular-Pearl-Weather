@@ -78,7 +78,7 @@ export class WeatherService {
     getForecastWeather(city: string): Subject<Array<any>>{
         const forecast = new Subject<Array<any>>();
         this.http.get(
-            'http://api.openweathermap.org/data/2.5/forecast?units=metric&appid=f31a5842e6d25da2c9de466f3ff67a68',
+            'https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=f31a5842e6d25da2c9de466f3ff67a68',
             {
                 params: {
                     'q': city
