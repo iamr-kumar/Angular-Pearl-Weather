@@ -43,6 +43,8 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => {
+            this.isLoading = true;
+            setTimeout(() => this.isLoading = false, 2000);
             this.city = params['id'];
             this.forecastWeather = [];
             if(this.weatherService.cities.includes(params['id'])){
@@ -56,7 +58,7 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
     }
 
     getWeatherInfo(city: string){
-        this.isLoading = true;
+        // this.isLoading = true;
         const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
                         'September', 'October', 'November', 'December'];
@@ -109,7 +111,7 @@ export class WeatherDetailComponent implements OnInit, OnDestroy {
                     previousDay = currentDay;
                 }
             }
-            this.isLoading = false;
+            // this.isLoading = false;
         });
     }
 

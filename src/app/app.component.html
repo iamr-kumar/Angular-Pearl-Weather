@@ -2,13 +2,13 @@
     <nav class="slide-menu" [ngClass] = "{'slide-menu-show': sideNavActive}">
         <section class="menu-header">
             <h4 class="welcome-text">Hello There</h4>
-            <div class="user-profile row">
-                <div class="col-md-4">
-                    <img src="https://images.unsplash.com/photo-1526621553736-d0cfb8b59b76?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
+            <div class="user-profile row justify-content-center">
+                <div class="col-sm-4 col-8">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
                     alt="user-profile-image" 
-                    class="profile-image">
+                    class="profile-image"> 
                 </div>
-                <div class="user-details col-md-8">
+                <div class="user-details col-sm-8">
                     <h5 class="user-name">{{user.displayName}}</h5>
                     <h6 class="user-email">{{user.email}}</h6>
                 </div>
@@ -16,7 +16,7 @@
         </section>
         <section class="menu-content">
             <div class="nav-routes">
-                <a [routerLink] = "['/']" [routerLink] = "['/home']">Home</a>
+                <a [routerLink] = "['/']" [routerLink] = "['/home']" (click) = "toggleNav()">Home</a>
                 <a [routerLink] = "['/']" (click) = "logout()">Logout</a>
             </div>
         </section>

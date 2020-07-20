@@ -35,3 +35,22 @@ h4, h5{
 .min-max-temp{
     text-transform: none;
 }
+
+@media only screen and (max-width: 764px){
+
+    .container-fluid{
+        padding: 2rem;
+    }
+
+    .weather-icon{
+        font-size: 6rem;
+    }
+
+    .main-temp h3{
+        font-size: 2rem;
+    }
+
+    .min-max-temp h4, h5{
+        font-size: 1rem;
+    }
+}

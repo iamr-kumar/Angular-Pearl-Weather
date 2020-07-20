@@ -1,3 +1,5 @@
+
+
 .weather-detail{
     -webkit-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
     -moz-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
@@ -5,7 +7,6 @@
     border-radius: 2.5rem;
     margin-bottom: 4rem;
     animation: slideup 1s ease-in-out, fadein 1.25s ease-in-out 0s 1;
-
 }
 
 .back-button a{
@@ -127,4 +128,43 @@
     letter-spacing: 1.2px;
     font-size: 1rem;
     font-weight: 400;
+}
+
+@media only screen and (max-width: 990px){
+
+    .current-weather{
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 2.5rem;
+    }
+
+    .forecast-weather{
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 540px){
+    .current-weather{
+        border-radius: 0;
+    }
+
+    .forecast-weather{
+        border-radius: 0;
+    }
+
+    .current-weather .back-button a{
+        display: none;
+    }
+
+    .current-date{
+        font-size: 1rem;
+    }
+
+    .main-temp{
+        font-size: 4rem;
+    }
+    
+    .temp-metric{
+        font-size: 4rem;
+    }
 }

@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row" *ngIf = "!isLoading">
-        <div class="col-md-4 single-component" *ngFor="let city of weatherService.cities"> 
+        <div class="col-sm-6 col-lg-4  single-component" *ngFor="let city of weatherService.cities"> 
             <app-single-card [city] = "city"></app-single-card>
         </div>
     </div>

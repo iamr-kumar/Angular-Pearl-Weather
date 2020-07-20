@@ -6,7 +6,18 @@
     </div>
 </div>
 
-<div class="container weather-detail" *ngIf = "!isLoading">
+<div class="container" *ngIf = "!isLoading && weatherService.errorMessage">
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-danger">
+                {{weatherService.errorMessage}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container weather-detail" *ngIf = "!isLoading && !weatherService.errorMessage">
     <div class="row">
         <div class="col-lg-8 align-items-stretch">
             <div class="current-weather" 
@@ -22,28 +33,28 @@
                     <span class="temp-metric">&#176;C</span>
                     <h3 class="weather-condition">{{state}}</h3>
                     <h6 class="feels-like">Feels like {{feelsLike}}&#176;C</h6>
-                    <div class="more-info-container">
-                        <div class="min-temp">
+                    <div class="more-info-container d-flex flex-wrap justify-content-md-between justify-content-sm-around">
+                        <div class="min-temp mt-3 mx-3">
                             <h6>Min</h6>
                             <h6>{{minTemp}}&#176;C</h6>
                         </div>
-                        <div class="max-temp">
+                        <div class="max-temp mt-3 mx-3">
                             <h6>Max</h6>
                             <h6>{{maxTemp}}&#176;C</h6>
                         </div>
-                        <div class="humidity">
+                        <div class="humidity mt-3 mx-3">
                             <h6>Humidity</h6>
                             <h6>{{humidity}}%</h6>
                         </div>
-                        <div class="wind-speed">
+                        <div class="wind-speed mt-3 mx-3">
                             <h6>Wind</h6>
                             <h6>{{wind}} KM/H</h6>
                         </div>
-                        <div class="sunset" *ngIf="isDay">
+                        <div class="sunset mt-3 mx-3" *ngIf="isDay">
                             <h6>Sunset</h6>
                             <h6>{{sunsetTime}}</h6>
                         </div>
-                        <div class="sunset" *ngIf="!isDay">
+                        <div class="sunset mt-3 mx-3" *ngIf="!isDay">
                             <h6>Sunrise</h6>
                             <h6>{{sunriseTime}}</h6>
                         </div>
@@ -57,7 +68,7 @@
         <div class="col-lg-4 align-items-stretch">
             <div class="forecast-weather">
                 <div class="next-week-weather row">
-                    <div class="one-day-weather col-lg-4 col-md-6"  *ngFor = "let forecast of forecastWeather">
+                    <div class="one-day-weather col-lg-3 col-sm-4 col-6 mx-lg-2"  *ngFor = "let forecast of forecastWeather">
                         <h4 class="day-name">{{forecast.day}}</h4>
                         <span><i [class] = "forecast.icon"></i></span>
                         <h4 class="temp-info">{{forecast.temp}}&#176;C</h4>
