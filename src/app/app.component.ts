@@ -34,7 +34,6 @@ export class AppComponent implements OnInit{
   }
 
   logout(){
-      console.log(this.user);
       this.auth.signOut().then(() => {
         this.user = null;
         this.router.navigate(['/home']);

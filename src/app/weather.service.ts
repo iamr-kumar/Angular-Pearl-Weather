@@ -12,6 +12,7 @@ export class WeatherService {
 
     city: string;
     cities: string[] = [];
+    errorMessage: string;
 
     constructor(private http: HttpClient, private router: Router, private fb: AuthService) {
         
@@ -30,10 +31,15 @@ export class WeatherService {
         .subscribe(
             (weather) => {
                 // console.log(weather);
+                this.errorMessage = "";
                 weatherData.next(weather);
             },
             (err) => {
-                console.log(err);
+                if(err.error.message === "city not found"){
+                    this.errorMessage = "City not found!";
+                }else{
+                    this.errorMessage = "Some error occured, please try again!";
+                }
             }
         );
 
@@ -54,10 +60,15 @@ export class WeatherService {
         .subscribe(
             (temp) => {
                 // console.log(temp['main']);
+                this.errorMessage = "";
                 tempData.next(temp['main']);
             },
             (err) => {
-                console.log(err);
+                if(err.error.message === "city not found"){
+                    this.errorMessage = "City not found!";
+                }else{
+                    this.errorMessage = "Some error occured, please try again!";
+                }
             }
         );
 
@@ -76,10 +87,15 @@ export class WeatherService {
         )
         .subscribe(data => {
             // console.log(data);
+            this.errorMessage = "";
             forecast.next(data['list']);
         },
         err => {
-            console.log(err);
+            if(err.error.message === "city not found"){
+                this.errorMessage = "City not found!";
+            }else{
+                this.errorMessage = "Some error occured, please try again!";
+            }
         });
         return forecast;
     }
