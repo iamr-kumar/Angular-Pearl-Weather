@@ -5,7 +5,7 @@
     -webkit-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
     -moz-box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
     box-shadow: -1px 0px 20px 0px rgba(86,86,87,1);
-    max-width: 70%;
+    max-width: 80%;
     margin: 0 auto;
     animation: slideup 1s ease-in-out, fadein 1.25s ease-in-out 0s 1;
 
@@ -13,7 +13,7 @@
 
 .login-form{
     margin: 0 auto;
-    max-width: 70%;
+    max-width: 80%;
     text-align: center;
 }
 
@@ -52,4 +52,40 @@
 
 .message a:hover{
     text-decoration: none;
+}
+
+@media only screen and (max-width: 764px){
+    .container{
+        margin: 2 10px;
+        
+    }
+
+    .row{
+        border-radius: 1rem;
+        margin: 0;
+        padding: 20px 15px;
+        max-width: 100%;
+    }
+
+    .login-form{
+        max-width: 100%;
+    }
+
+    .login-form h3{
+        font-size: 1.5rem;
+    }
+
+    .form-group input{
+        border-radius: 2rem;
+    }
+
+    .login-button{
+        border-radius: 2rem;
+    }
+
+    .message span{
+        display: block;
+    }
+
+    
 }

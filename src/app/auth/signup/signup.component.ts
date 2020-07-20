@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn()){
@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
       const user: User = {
           displayName: register.value.name,
           email: register.value.email,
-          cities: []
+          cities: ["Ranchi", "Rome"]
       }
       this.auth.register(user, register.value.password);
   }

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private weatherService: WeatherService,
+  constructor(public auth: AuthService, private weatherService: WeatherService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit {
           res => {
             this.router.navigate(['/home']);
           }, err => {
-              console.log(err);
+              this.auth.errorMessage = "Invalid email or password!";
+              setTimeout(() => {
+                this.auth.errorMessage = "";
+            }, 3000);
           }
       ).catch(err => {
           console.log(err);

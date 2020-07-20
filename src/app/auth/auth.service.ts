@@ -11,6 +11,7 @@ import { switchMap, tap } from 'rxjs/operators';
 export class AuthService{
     user: Observable<User>;
     uid: string;
+    errorMessage: string;
 
     constructor(private afAuth: AngularFireAuth,
         private afs: AngularFirestore, 
@@ -33,7 +34,10 @@ export class AuthService{
                 this.addUser(user, res.user.uid);
                 this.router.navigate(['/home']);
             }, err => {
-                console.log(err);
+                this.errorMessage = err.message;
+                setTimeout(() => {
+                    this.errorMessage = "";
+                }, 3000);
             }
         ).catch(err => {
             console.log(err);
